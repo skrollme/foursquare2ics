@@ -1,5 +1,6 @@
 {
     "require": {
-        "hownowstephen/php-foursquare": "1.2.*"
+        "hownowstephen/php-foursquare": "1.2.*",
+        "eluceo/ical": "^0.15.0"
     }
 }
