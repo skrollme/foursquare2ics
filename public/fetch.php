@@ -1,5 +1,5 @@
 <?php
-    require("etc/config.php");
+    require("../etc/config.php");
     error_reporting(E_ALL);
     // MYSQL
     $db = new mysqli(MYSQL_HOST,MYSQL_USER, MYSQL_PASS,MYSQL_DB);
@@ -8,7 +8,7 @@
     }
 
     // FOURSQUARE API
-    require_once 'vendor/autoload.php';
+    require_once '../vendor/autoload.php';
     $foursquare = new FoursquareApi(FOURSQUARE_CLIENTID, FOURSQUARE_CLIENTSECRET);
     $foursquare->SetAccessToken(FOURSQUARE_OAUTHTOKEN);
     $params = array(
