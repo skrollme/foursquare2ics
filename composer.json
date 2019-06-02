@@ -1,0 +1,5 @@
+{
+    "require": {
+        "hownowstephen/php-foursquare": "1.2.*"
+    }
+}

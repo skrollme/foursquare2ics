@@ -1,0 +1,10 @@
+<?php
+const MYSQL_HOST = '';
+const MYSQL_USER = '';
+const MYSQL_PASS = '';
+const MYSQL_DB = '';
+
+const FOURSQUARE_CLIENTID = '';
+const FOURSQUARE_CLIENTSECRET = '';
+const FOURSQUARE_OAUTHTOKEN = '';
+const FOURSQUARE_USERID = '';

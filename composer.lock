@@ -1,0 +1,45 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "a0a5f5d102b733506b441d3fec35fd5c",
+    "packages": [
+        {
+            "name": "hownowstephen/php-foursquare",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hownowstephen/php-foursquare.git",
+                "reference": "f2f6d3656556bf3575f8beca5dd44109c999b5a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hownowstephen/php-foursquare/zipball/f2f6d3656556bf3575f8beca5dd44109c999b5a0",
+                "reference": "f2f6d3656556bf3575f8beca5dd44109c999b5a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FoursquareApi": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "A simple PHP library for accessing the foursquare API (see: https://developer.foursquare.com)",
+            "time": "2015-06-08T14:19:23+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
