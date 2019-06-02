@@ -5,8 +5,8 @@ use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\Geo;
 
 error_reporting(E_ALL);
-require __DIR__. '/../etc/config.php';
-require_once __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../etc/config.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // MYSQL
 $db = new mysqli(MYSQL_HOST,MYSQL_USER, MYSQL_PASS,MYSQL_DB);
