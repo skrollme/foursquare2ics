@@ -1,31 +1,32 @@
 <?php
-    require("../etc/config.php");
     error_reporting(E_ALL);
+    require __DIR__. '/../etc/config.php';
+    require_once __DIR__.'/../vendor/autoload.php';
+
     // MYSQL
     $db = new mysqli(MYSQL_HOST,MYSQL_USER, MYSQL_PASS,MYSQL_DB);
     if ($db->connect_errno) {
-        die('Error connecting to MySQL: ('.$mysqli->connect_errno.')'.$mysqli->connect_error);
+        die('Error connecting to MySQL: ('.$db->connect_errno.')'.$db->connect_error);
     }
 
     // FOURSQUARE API
-    require_once '../vendor/autoload.php';
     $foursquare = new FoursquareApi(FOURSQUARE_CLIENTID, FOURSQUARE_CLIENTSECRET);
     $foursquare->SetAccessToken(FOURSQUARE_OAUTHTOKEN);
     $params = array(
-        "limit" => 250,
+        "limit" => 100,
         "offset" => 0
     );
-    $data = $foursquare->GetPrivate("users/".FOURSQUARE_USERID."/checkins",$params);
+    $data = $foursquare->GetPrivate('users/' .FOURSQUARE_USERID. '/checkins',$params);
 
     if($data = json_decode($data)) {
-        if ($data->meta->code == "200" && isset($data->response->checkins->items)) {
+        if ($data->meta->code == '200' && isset($data->response->checkins->items)) {
             foreach ($data->response->checkins->items AS $item) {
                 if (!$resItemExists = mysqli_query($db, sprintf("SELECT * FROM 4sq2ics_checkins WHERE id = '%s'", $item->id))) {
-                    die("Error fetching itemexists");
+                    die('Error fetching itemexists');
                 }
 
                 if ($resItemExists->num_rows !== 0) {
-                    echo $item->id . " found, skipping<br>";
+                    echo $item->id . " found, skipping\n";
                     continue;
                 }
 
@@ -49,9 +50,9 @@
 
                 $sql = sprintf("INSERT INTO 4sq2ics_checkins VALUES (%s)", "'" . implode("','", $dataset) . "'");
                 if ($resAdditem = mysqli_query($db, $sql)) {
-                    echo "added<br>";
+                    echo "added\n";
                 } else {
-                    echo "problem (".mysqli_error($db).")<br>";
+                    echo "problem (".mysqli_error($db).")\n";
                 }
             }
         }
