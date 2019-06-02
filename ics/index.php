@@ -4,7 +4,6 @@ use Eluceo\iCal\Component\Calendar;
 use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\Geo;
 
-error_reporting(E_ALL);
 require __DIR__ . '/../etc/config.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -16,24 +15,33 @@ if ($db->connect_errno) {
 
 $vCalendar = new Calendar('foursquare2ics.dev.skroll.me');
 
-if($resCheckins = mysqli_query($db, "SELECT * FROM 4sq2ics_checkins ORDER BY timestamp DESC")) {
+if($resCheckins = mysqli_query($db, 'SELECT * FROM 4sq2ics_checkins ORDER BY timestamp DESC')) {
     foreach ($resCheckins AS $checkin) {
 
-        $dtStart = new DateTime("@{$checkin["timestamp"]}",new DateTimeZone('Europe/Berlin'));
+        $dtStart = new DateTime("@{$checkin['timestamp']}",new DateTimeZone('Europe/Berlin'));
 
         $dtEnd = clone $dtStart;
-        $dtEnd->add(new DateInterval("PT30M"));
+        $dtEnd->add(new DateInterval('PT30M'));
 
-        $location = '';
+        $location = array();
         if(trim($checkin['address']) != '') {
-            $location .= $checkin['address'];
+            $location[0] = $checkin['address'];
+        }
+        if(trim($checkin['zip']) != '') {
+            $location[1] = $checkin['zip'];
         }
         if(trim($checkin['city']) != '') {
-            $location .= "\n".$checkin['city'];
+            if(isset($location[1])) {
+                $location[1] .= ' ' . $checkin['city'];
+            } else {
+                $location[1] = $checkin['city'];
+            }
         }
         if(trim($checkin['country']) != '') {
-            $location .= ', '.$checkin['country'];
+            $location[2] = $checkin['country'];
         }
+
+        $location = implode(', ', $location);
 
         $vEvent = new Event();
         $vEvent
