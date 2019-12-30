@@ -49,8 +49,7 @@ if($resCheckins = mysqli_query($db, 'SELECT * FROM 4sq2ics_checkins ORDER BY tim
             ->setDtEnd($dtEnd)
             ->setLocation(utf8_encode($location), $checkin['venue'], new Geo((float)$checkin['lat'], (float)$checkin['long']))
             ->setUrl(sprintf('https://www.swarmapp.com/checkin/%s', $checkin['id']))
-            ->setSummary($checkin['venue']
-            );
+            ->setSummary(utf8_encode($checkin['venue']));
         $vCalendar->addComponent($vEvent);
     }
 }
